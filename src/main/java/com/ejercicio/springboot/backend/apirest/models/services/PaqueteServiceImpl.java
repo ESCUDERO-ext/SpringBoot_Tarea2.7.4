@@ -3,6 +3,8 @@ package com.ejercicio.springboot.backend.apirest.models.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,12 @@ public class PaqueteServiceImpl implements IPaqueteService {
 	@Transactional(readOnly = true)
 	public List<Paquete> findAll() {
 		return (List<Paquete>) paqueteDao.findAll();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Paquete> findAll(Pageable pageable) {
+		return paqueteDao.findAll(pageable);
 	}
 
 	@Override

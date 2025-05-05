@@ -8,11 +8,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+//import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -28,22 +29,23 @@ public class Paquete implements Serializable {
 	@Column(nullable= false)
 	private String pedido;
 	
-	@NotEmpty(message = "No puede estar vacío")
-	@Column(nullable= false)
-	private double precio;
+	@NotNull(message = "No puede estar vacío")
+	@Column(nullable = false)
+	private Double precio; // Cambiado de double a Double
 	
 	@NotEmpty(message = "No puede estar vacío")
 	@Column(nullable= false)
 	@Size(min=4, message = "El tamaño tiene que ser mínimo de 4")
 	private String destino;
 	
+	@NotNull(message = "No puede estar vacío")
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		fecha = new Date();
-	}
+	}*/
 	
 	public Long getId() {
 		return id;
